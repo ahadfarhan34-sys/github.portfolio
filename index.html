@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Muhammad Ahad Farhan | Portfolio</title>
-
   <style>
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -14,184 +12,575 @@
       font-family: Arial, Helvetica, sans-serif;
       background: #0b1020;
       color: #f3f4f6;
+      line-height: 1.65;
     }
 
-    a { color: #93c5fd; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a {
+      color: #93c5fd;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
 
     .container {
-      width: min(1100px, 92%);
+      width: min(1150px, 92%);
       margin: 0 auto;
     }
 
     nav {
       position: sticky;
       top: 0;
-      background: #0b1020;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      z-index: 1000;
+      background: rgba(11, 16, 32, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
     .nav-inner {
       display: flex;
       justify-content: space-between;
-      padding: 15px 0;
+      align-items: center;
+      padding: 16px 0;
     }
 
-    .nav-links a { margin-left: 15px; }
+    .brand {
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #e5e7eb;
+      font-size: 0.95rem;
+    }
 
     .hero {
-      padding: 80px 0;
+      padding: 90px 0 70px;
+      background:
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.24), transparent 30%),
+        radial-gradient(circle at left, rgba(14, 165, 233, 0.12), transparent 25%),
+        #0b1020;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.9fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid rgba(147, 197, 253, 0.35);
+      border-radius: 999px;
+      color: #bfdbfe;
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.1;
+      margin: 0 0 16px;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      max-width: 720px;
+    }
+
+    .hero-buttons {
+      margin-top: 28px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #f3f4f6;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
       text-align: center;
     }
 
-    .hero img {
-      width: 180px;
+    .hero-card img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
       border-radius: 50%;
-      border: 3px solid #2563eb;
+      border: 4px solid #2563eb;
+      box-shadow: 0 0 25px rgba(37, 99, 235, 0.35);
+      margin-bottom: 18px;
     }
 
-    section { padding: 60px 0; }
+    section {
+      padding: 72px 0;
+    }
 
-    .card {
-      background: #11182d;
-      padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 20px;
+    .section-title {
+      font-size: 2rem;
+      margin: 0 0 10px;
+    }
+
+    .section-subtitle {
+      color: #94a3b8;
+      max-width: 800px;
+      margin-bottom: 30px;
+    }
+
+    .about-grid,
+    .contact-grid,
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
     }
 
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: #11182d;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+    }
+
+    .card h3,
+    .project-card h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
+    .card p,
+    .card li,
+    .project-card p {
+      color: #cbd5e1;
+    }
+
+    .stack {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
     }
 
     .pill {
-      background: #2563eb;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-      margin-right: 5px;
+      font-size: 0.82rem;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.14);
+      color: #bfdbfe;
+      border: 1px solid rgba(147, 197, 253, 0.15);
+    }
+
+    .timeline-item {
+      border-left: 2px solid rgba(59,130,246,0.4);
+      padding-left: 18px;
+      margin-bottom: 22px;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 14px;
+      font-weight: 700;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 0 40px;
+      color: #94a3b8;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .about-grid,
+      .contact-grid,
+      .experience-grid,
+      .projects-grid,
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-inner {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
     }
   </style>
-
 </head>
-
 <body>
-
-<nav>
-  <div class="container nav-inner">
-    <div><strong>Muhammad Ahad Farhan</strong></div>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand">Muhammad Ahad Farhan</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<header class="hero">
-  <div class="container">
-    <img src="images/profile.jpg">
-    <h1>IT Support | Cybersecurity | Networking</h1>
-    <p>Final Semester Master of IT student with skills in Python, databases, networking and support.</p>
-  </div>
-</header>
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="tag">Final Semester Master of Information Technology Student</span>
+        <h1>IT Support, Cybersecurity, Data & Systems Portfolio</h1>
+        <p>
+          I am Muhammad Ahad Farhan, an aspiring IT professional based in Brisbane with interests in IT support,
+          cybersecurity, networking, Python, databases, and data analysis. This portfolio highlights my academic
+          work, technical projects, and practical background across support, troubleshooting, analytics, and digital systems.
+        </p>
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="#projects">View Projects</a>
+          <a class="btn btn-secondary" href="#contact">Contact Me</a>
+        </div>
+      </div>
 
-<section id="about">
-  <div class="container">
-    <h2>About Me</h2>
-    <p>
-      I am a Master of Information Technology student based in Brisbane, specialising in IT support,
-      cybersecurity, networking, and data systems. I have hands-on experience through academic projects
-      and practical work in troubleshooting and system support.
-    </p>
-  </div>
-</section>
+      <div class="hero-card">
+        <img src="images/profile.jpg" alt="Muhammad Ahad Farhan" />
+        <h3 style="margin-bottom: 8px;">Muhammad Ahad Farhan</h3>
+        <p style="color:#cbd5e1; margin-top:0;">IT Support | Cybersecurity | Networking | Data Projects</p>
 
-<section id="skills">
-  <div class="container">
-    <h2>Skills</h2>
-    <ul>
-      <li><strong>Programming:</strong> Python, JavaScript</li>
-      <li><strong>Databases:</strong> MongoDB, SQL</li>
-      <li><strong>Web:</strong> HTML, CSS</li>
-      <li><strong>Data:</strong> Excel, Dashboard Design</li>
-      <li><strong>Networking:</strong> TCP/IP, DNS, DHCP</li>
-      <li><strong>Tools:</strong> GitHub, VS Code</li>
-    </ul>
-  </div>
-</section>
+        <div class="stack" style="justify-content:center; margin-top:18px;">
+          <span class="pill">Python</span>
+          <span class="pill">MongoDB</span>
+          <span class="pill">Excel</span>
+          <span class="pill">IT Support</span>
+          <span class="pill">Networking</span>
+        </div>
+      </div>
+    </div>
+  </header>
 
-<section id="projects">
-  <div class="container">
-    <h2>Projects</h2>
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-subtitle">
+        I combine technical learning with practical problem solving. My background includes user support,
+        hardware and software troubleshooting, networking fundamentals, cybersecurity coursework, Python programming,
+        databases, and dashboard-based data analysis.
+      </p>
 
-```
-<div class="projects-grid">
+      <div class="about-grid">
+        <div class="card">
+          <h3>Profile</h3>
+          <p>
+            I am currently completing my Master of Information Technology at the University of the Sunshine Coast.
+            My focus areas include technical support, cybersecurity, networking, databases, and building practical
+            skills that can be applied in real business and operational environments.
+          </p>
+        </div>
 
-  <div class="card">
-    <h3>Suspicious Activity Detector (Python)</h3>
-    <p>
-      Developed a cybersecurity tool to analyse logs and detect suspicious activities like brute-force attacks.
-    </p>
-    <span class="pill">Python</span>
-    <span class="pill">Cybersecurity</span>
-  </div>
+        <div class="card">
+          <h3>Education</h3>
+          <p><strong>Master of Information Technology</strong><br>University of the Sunshine Coast<br>Expected August 2026</p>
+          <p><strong>Bachelor of Business Administration</strong><br>Bahria University, Karachi, Pakistan</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="card">
-    <h3>MongoDB Gamified Platform</h3>
-    <p>
-      Designed a NoSQL database for a learning platform with badges, users, and activity tracking.
-    </p>
-    <span class="pill">MongoDB</span>
-    <span class="pill">CRUD</span>
-  </div>
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title">Technical Skills</h2>
+      <p class="section-subtitle">
+        A combination of support, infrastructure, programming, databases, web tools, and analytics developed through coursework and project work.
+      </p>
 
-  <div class="card">
-    <h3>Healthcare Dashboard</h3>
-    <p>
-      Built an interactive Excel dashboard with KPIs, slicers, and visual analytics.
-    </p>
-    <a href="Task2-Healthcare_Dashboard.xlsx">Download Dashboard</a>
-    <br><br>
-    <span class="pill">Excel</span>
-    <span class="pill">Dashboard</span>
-  </div>
+      <div class="skills-grid">
+        <div class="card">
+          <h3>IT Support & Troubleshooting</h3>
+          <p>
+            Supporting users, diagnosing hardware and software issues, configuring systems, and solving day-to-day technical problems.
+          </p>
+          <div class="stack">
+            <span class="pill">Windows 10/11</span>
+            <span class="pill">User Support</span>
+            <span class="pill">Troubleshooting</span>
+            <span class="pill">System Setup</span>
+          </div>
+        </div>
 
-  <div class="card">
-    <h3>AFCQ Digitalisation Project</h3>
-    <p>
-      Developed a web-based athlete survey platform using Qualtrics with database integration.
-    </p>
-    <span class="pill">HTML</span>
-    <span class="pill">Qualtrics</span>
-  </div>
+        <div class="card">
+          <h3>Networking & Security</h3>
+          <p>
+            Foundation knowledge in TCP/IP, DNS, DHCP, LAN/WAN troubleshooting, cybersecurity concepts, and suspicious activity detection.
+          </p>
+          <div class="stack">
+            <span class="pill">TCP/IP</span>
+            <span class="pill">DNS</span>
+            <span class="pill">DHCP</span>
+            <span class="pill">Cybersecurity</span>
+          </div>
+        </div>
 
-</div>
-```
+        <div class="card">
+          <h3>Programming & Databases</h3>
+          <p>
+            Building solutions with Python and working with document-oriented databases using MongoDB, including CRUD operations and data modelling.
+          </p>
+          <div class="stack">
+            <span class="pill">Python</span>
+            <span class="pill">MongoDB</span>
+            <span class="pill">NoSQL</span>
+            <span class="pill">CRUD</span>
+          </div>
+        </div>
 
-  </div>
-</section>
+        <div class="card">
+          <h3>Data & Web Tools</h3>
+          <p>
+            Creating dashboards, using Excel for analytics, and contributing to web-based and survey-driven digital platforms.
+          </p>
+          <div class="stack">
+            <span class="pill">Excel</span>
+            <span class="pill">Dashboards</span>
+            <span class="pill">HTML/CSS</span>
+            <span class="pill">Qualtrics</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section id="contact">
-  <div class="container">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:ahadfarhan34@gmail.com">ahadfarhan34@gmail.com</a></p>
-    <p>
-      LinkedIn: 
-      <a href="https://www.linkedin.com/in/muhammad-ahad-farhan-9ab194204" target="_blank">
-        View Profile
-      </a>
-    </p>
-    <p>
-      GitHub:
-      <a href="https://github.com/ahadfarhan34-sys" target="_blank">
-        View GitHub
-      </a>
-    </p>
-  </div>
-</section>
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">
+        Key academic and technical projects that demonstrate my skills across cybersecurity, databases, digital systems, and data visualisation.
+      </p>
 
+      <div class="projects-grid">
+        <div class="card project-card">
+          <h3>Suspicious Activity Detector from System Logs (SADSL)</h3>
+          <p>
+            Developed a Python-based cybersecurity tool to analyse system log files and automatically detect suspicious
+            patterns such as repeated failed login attempts, restricted resource access, and time-window brute-force behaviour.
+            The solution processes structured log entries, applies configurable detection rules, and generates summary reporting.
+          </p>
+          <p>
+            <strong>Key Features:</strong> Failed login detection, restricted URL monitoring, JSON-based configurable rules,
+            time-window brute-force analysis, and export/reporting support.
+          </p>
+          <p>
+            <strong>What I learned:</strong> Practical log analysis, rule-based detection, Python problem solving,
+            structured testing, and basic cybersecurity monitoring concepts.
+          </p>
+          <div class="stack">
+            <span class="pill">Python</span>
+            <span class="pill">Cybersecurity</span>
+            <span class="pill">Log Analysis</span>
+            <span class="pill">JSON</span>
+          </div>
+        </div>
+
+        <div class="card project-card">
+          <h3>Healthcare Participation Dashboard</h3>
+          <p>
+            Designed an interactive healthcare dashboard to support decision-making around participation, outcomes,
+            and service utilisation. The dashboard uses KPI cards, pivot tables, slicers, and multiple charts to help
+            managers explore patterns by region, insurance type, admission type, and medical condition.
+          </p>
+          <p>
+            <strong>Key Features:</strong> KPI indicators, slicers, interactive charts, pivot-based analysis,
+            outcome comparison, and length-of-stay analysis for healthcare data.
+          </p>
+          <p>
+            <strong>What I learned:</strong> Data visualisation principles, dashboard structure, interactive reporting,
+            and presenting analytical insights clearly for real-world decision-making.
+          </p>
+          <div class="stack">
+            <span class="pill">Excel</span>
+            <span class="pill">Data Visualisation</span>
+            <span class="pill">Pivot Tables</span>
+            <span class="pill">Dashboard Design</span>
+          </div>
+          <a class="project-link" href="Task2-Healthcare_Dashboard.xlsx" target="_blank">Download Dashboard</a>
+        </div>
+
+        <div class="card project-card">
+          <h3>MongoDB Gamified Learning Platform (TechTutors)</h3>
+          <p>
+            Designed and explained a MongoDB database solution for a gamified learning platform that stores users,
+            badges, and activity logs. The project focused on a document-based structure to support flexible data,
+            fast reads, CRUD operations, leaderboard functionality, and scalable learner engagement tracking.
+          </p>
+          <p>
+            <strong>Key Features:</strong> Users, badges, and activity log collections, CRUD operations,
+            embedded data structures, leaderboard queries, and scalable NoSQL modelling.
+          </p>
+          <p>
+            <strong>What I learned:</strong> MongoDB collection design, document-oriented databases,
+            NoSQL reasoning, backend data modelling, and database support for real-time applications.
+          </p>
+          <div class="stack">
+            <span class="pill">MongoDB</span>
+            <span class="pill">NoSQL</span>
+            <span class="pill">CRUD</span>
+            <span class="pill">Database Design</span>
+          </div>
+        </div>
+
+        <div class="card project-card">
+          <h3>Athlete Food Choice Questionnaire (AFCQ) Digitalisation</h3>
+          <p>
+            Contributed to the digital transformation of the Athlete Food Choice Questionnaire into a web-based platform
+            designed to improve athlete engagement, accessibility, and research efficiency. The project included survey
+            digitalisation, database considerations, secure web delivery, and collaboration using modern web tools.
+          </p>
+          <p>
+            <strong>Key Features:</strong> Qualtrics survey deployment, web integration, secure storage approach,
+            backend database planning, stakeholder collaboration, and analytics/reporting support.
+          </p>
+          <p>
+            <strong>What I learned:</strong> Web project collaboration, digital platform thinking, Agile teamwork,
+            and applying technical tools to a real research-focused solution.
+          </p>
+          <div class="stack">
+            <span class="pill">Qualtrics</span>
+            <span class="pill">HTML</span>
+            <span class="pill">CSS</span>
+            <span class="pill">JavaScript</span>
+            <span class="pill">SQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="container">
+      <h2 class="section-title">Experience & Certifications</h2>
+      <p class="section-subtitle">
+        Professional background and credentials that support my transition into technical support and broader IT roles.
+      </p>
+
+      <div class="experience-grid">
+        <div class="card">
+          <h3>Professional Experience</h3>
+
+          <div class="timeline-item">
+            <strong>Social Media Executive & IT Support</strong><br>
+            Salsoft Technologies | Karachi, Pakistan | 2022 – 2023
+            <p>
+              Provided IT support, resolved hardware, software, and network issues, configured systems and applications,
+              and maintained documentation while supporting digital operations.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <strong>Assistant Manager – Social Media Department</strong><br>
+            Crystallite Pvt Ltd | Karachi, Pakistan | 2023
+            <p>
+              Managed platforms, coordinated with teams, and prepared analytics reports, strengthening communication,
+              reporting, and operational support capabilities.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Certifications</h3>
+          <p>Microsoft Certified: Power Platform Fundamentals (PL-900)</p>
+          <p>Pearson IT Specialist: Python Programming</p>
+
+          <h3 style="margin-top: 28px;">Career Goal</h3>
+          <p>
+            Seeking an entry-level IT Support or Helpdesk role where I can apply technical skills, continue learning,
+            and grow within the IT industry.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-subtitle">
+        Feel free to connect with me for opportunities, collaborations, or professional networking.
+      </p>
+
+      <div class="contact-grid">
+        <div class="card">
+          <h3>Get in Touch</h3>
+          <p><strong>Name:</strong> Muhammad Ahad Farhan</p>
+          <p><strong>Location:</strong> Brisbane, QLD</p>
+          <p><strong>Email:</strong> <a href="mailto:ahadfarhan34@gmail.com">ahadfarhan34@gmail.com</a></p>
+        </div>
+
+        <div class="card">
+          <h3>Online Profiles</h3>
+          <p>
+            <strong>LinkedIn:</strong>
+            <a href="https://www.linkedin.com/in/muhammad-ahad-farhan-9ab194204" target="_blank">View LinkedIn Profile</a>
+          </p>
+          <p>
+            <strong>GitHub:</strong>
+            <a href="https://github.com/ahadfarhan34-sys" target="_blank">View GitHub Profile</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © 2026 Muhammad Ahad Farhan. Built for GitHub Pages.
+    </div>
+  </footer>
 </body>
 </html>
